@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/06 12:35:40 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:02:17 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 #include <stdio.h>
 int main(void)
 {
-	unsigned long time;
+	//unsigned long time;
 
-	time = time_now();
-	printf("UNIX timestamp ms: %lu\n", time);
+	//time = time_now();
+	start_routine();
 	return (0);
 }
