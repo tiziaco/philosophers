@@ -1,0 +1,13 @@
+*.json
+*.pdf
+*.DS*
+*.a
+*.o
+*.out
+*.txt
+*.pdf
+philo
+push_swap
+main
+test
+test*.c
