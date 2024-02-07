@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/02/06 12:34:21 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/02/07 11:39:38 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ OBJ	= $(SRC:.c=.o)
 
 RM		= rm -f
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -pthread
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -g -O0 $(OBJ) -o $(NAME)
+	$(CC) -pthread -g -O0 $(OBJ) -o $(NAME)
 
 src/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

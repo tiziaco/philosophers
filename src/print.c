@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.c                                         :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/07 17:38:50 by tiacovel         ###   ########.fr       */
+/*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
+/*   Updated: 2024/02/07 17:47:56 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	*start_routine()
+void	print_parms(t_parms parms)
 {
-	t_time	start_time;
-	t_time	cur_time;
-	int		i;
-	
+	printf("Philosophers Number: %d\n", parms.phils_nbr);
+	printf("Time to Die: %d\n", parms.time_to_die);
+	printf("Time to Eat: %d\n", parms.time_to_eat);
+	printf("Time to Sleep: %d\n", parms.time_to_sleep);
+	printf("Is Valid: %s\n", parms.is_valid ? "true" : "false");
+}
+
+void	print_philo_ids(t_philo **philosophers)
+{
+	int i;
+
 	i = 0;
-	gettimeofday(&start_time, 0);
-	while (i < 100)
+	while (philosophers[i] != NULL)
 	{
-		gettimeofday(&cur_time, 0);
-		printf("%d\n", elapsed_time(start_time, cur_time));
-		usleep(2000);
+		printf("Philosopher's ID: %d => READY\n", philosophers[i]->id);
 		i++;
 	}
-	return (NULL);
 }
