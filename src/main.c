@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/07 17:51:03 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:53:50 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ t_parms	init_parms(int argc, char **argv)
 
 /* int	main(int argc, char **argv)
 {
-	t_philo	**philosophers;
-	t_parms	parms;
+	t_parms			parms;
+	t_philo			**philosophers;
+	pthread_mutex_t	**forks;
 
 	if (argc < 5)
 		return (0);
@@ -50,6 +51,11 @@ t_parms	init_parms(int argc, char **argv)
 	philosophers = init_philosphers(parms);
 	if (!parms.is_valid)
 		return (ALLOCATION_ERROR);
+	forks = init_forks(parms.phils_nbr);
+	if (!forks)
+		return (ALLOCATION_ERROR);
+	free_philosophers(philosophers);
+	free_forks(forks);
 	return (0);
 } */
 
@@ -62,25 +68,36 @@ t_parms	init_parms_test()
 	parms.time_to_die = 200;
 	parms.time_to_eat = 200;
 	parms.time_to_sleep = 200;
+	parms.nbr_must_eat = 0;
 	parms.is_valid = true;
 	return (parms);
 }
-int main(void)
+
+int	main(void)
 {
 	//pthread_t t1;
-	t_philo **philosophers;
-	t_parms	parms;
+	t_parms			parms;
+	t_philo			**philosophers;
+	pthread_mutex_t	**forks;
 
 	parms = init_parms_test();
 	if (!parms.is_valid)
 		return (PARMS_ERROR);
 	philosophers = init_philosphers(parms);
-	if (!parms.is_valid)
+	if (!philosophers)
+		return (ALLOCATION_ERROR);
+	forks = init_forks(parms.phils_nbr);
+	if (!forks)
 		return (ALLOCATION_ERROR);
 	print_parms(parms);
 	print_philo_ids(philosophers);
 	free_philosophers(philosophers);
+	free_forks(forks);
 	/* pthread_create(&t1, NULL, &start_routine, NULL);
 	pthread_join(t1, NULL); */
+
+	pthread_mutex_t	fork;
+	pthread_mutex_init(&fork, NULL)
+
 	return (0);
 }

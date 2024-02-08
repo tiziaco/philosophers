@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/02/07 11:39:38 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/02/08 12:00:15 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ $(NAME): $(OBJ)
 	$(CC) -pthread -g -O0 $(OBJ) -o $(NAME)
 
 src/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -g -O0 -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)

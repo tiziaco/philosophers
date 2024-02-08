@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/07 17:47:31 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:50:51 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int		is_num(const char *str);
 /* Philosopher functions */
 t_philo	**init_philosphers(t_parms parms);
 void	free_philosophers(t_philo **philosphers);
+
+/* Forks functions*/
+pthread_mutex_t	**init_forks(int philo_nbr);
+void	free_forks(pthread_mutex_t **forks);
 
 /* Runtime functions */
 void	*start_routine();

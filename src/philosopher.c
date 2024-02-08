@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:04:15 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/07 17:44:26 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:44:46 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_philo	**init_philosphers(t_parms parms)
 	while (i < parms.phils_nbr)
 	{
 		philosophers[i] = create_philosopher(i, parms);
-		if (philosophers[i] == NULL)
+		if (!philosophers[i])
 		{
 			free_philosophers(philosophers);
 			return (NULL);
