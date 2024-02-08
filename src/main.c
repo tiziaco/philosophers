@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/08 12:53:50 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:26:23 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,5 @@ int	main(void)
 	free_forks(forks);
 	/* pthread_create(&t1, NULL, &start_routine, NULL);
 	pthread_join(t1, NULL); */
-
-	pthread_mutex_t	fork;
-	pthread_mutex_init(&fork, NULL)
-
 	return (0);
 }
