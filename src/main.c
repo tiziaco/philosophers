@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/08 15:26:23 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:24:35 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	main(void)
 	t_parms			parms;
 	t_philo			**philosophers;
 	pthread_mutex_t	**forks;
+	pthread_t	t1; 
 
 	parms = init_parms_test();
 	if (!parms.is_valid)
@@ -93,7 +94,7 @@ int	main(void)
 	print_philo_ids(philosophers);
 	free_philosophers(philosophers);
 	free_forks(forks);
-	/* pthread_create(&t1, NULL, &start_routine, NULL);
-	pthread_join(t1, NULL); */
+	pthread_create(&t1, NULL, &start_routine, NULL);
+	pthread_join(t1, NULL);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/08 11:50:51 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:25:39 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ typedef struct s_philo
 }	t_philo;
 
 /* Time functions */
-int		elapsed_time(t_time start_time, t_time end_time);
+int		elapsed_time_ms(t_time start_time, t_time end_time);
+void	precise_usleep(long usec);
 
 /* Utility functions */
 int		is_num(const char *str);

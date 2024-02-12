@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/08 15:25:09 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:02:35 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,26 @@ void	*start_routine()
 	
 	i = 0;
 	gettimeofday(&start_time, 0);
-	while (i < 100)
+	while (i < 4000)
 	{
 		gettimeofday(&cur_time, 0);
-		printf("%d\n", elapsed_time(start_time, cur_time));
-		usleep(2000);
+		printf("%d\n", elapsed_time_ms(start_time, cur_time));
+		precise_usleep(4000);
 		i++;
 	}
+	printf("	Total elapsed time: %d [ms]\n", elapsed_time_ms(start_time, cur_time));
 	return (NULL);
 }
 
 void *philosopher(void *arg)
 {
 	int id;
-	int left_fork = id;
-	int right_fork = (id + 1); //% NUM_PHILOSOPHERS; TODO: put data(forks and philosophers) in a struct
+	int left_fork;
+	int right_fork; //% NUM_PHILOSOPHERS; TODO: put data(forks and philosophers) in a struct
 
 	id = *(int *)arg;
+	left_fork = id;
+	right_fork = (id + 1);
 	while (1) 
 	{
 		// Thinking
