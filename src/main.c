@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/12 10:24:35 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:25:10 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(void)
 	forks = init_forks(parms.phils_nbr);
 	if (!forks)
 		return (ALLOCATION_ERROR);
+	
 	print_parms(parms);
 	print_philo_ids(philosophers);
 	free_philosophers(philosophers);

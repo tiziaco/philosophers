@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/12 10:25:39 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:45:48 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ALLOCATION_ERROR	2
 
 typedef struct timeval t_time;
+typedef pthread_mutex_t  t_mutex;
 
 typedef struct s_parms
 {
@@ -37,14 +38,23 @@ typedef struct s_parms
 	bool	is_valid;
 }	t_parms;
 
+typedef struct s_fork
+{
+	t_mutex	fork;
+	int		id;
+}	t_fork;
+
 typedef struct s_philo
 {
-	int	id;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int nbr_must_eat;
-	int	last_eat_time;
+	int			id;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			meals_counter;
+	int			last_eat_time;
+	t_fork		*left_fork;
+	t_fork		*right_fork;
+	pthread_t	thread_id;
 }	t_philo;
 
 /* Time functions */

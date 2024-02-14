@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/12 11:02:35 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:23:50 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*start_routine()
 		precise_usleep(4000);
 		i++;
 	}
-	printf("	Total elapsed time: %d [ms]\n", elapsed_time_ms(start_time, cur_time));
+	//printf("	Total elapsed time: %d [ms]\n", elapsed_time_ms(start_time, cur_time));
 	return (NULL);
 }
 
@@ -60,4 +60,11 @@ void *philosopher(void *arg)
 		pthread_mutex_unlock(&((*((pthread_mutex_t**)arg))[left_fork]));
 	}
 	return NULL;
+}
+
+void	*manager(void *arg)
+{
+	int	start_time;
+	
+	start_time = *(int *)arg;
 }
