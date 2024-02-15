@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:52:25 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/12 11:14:00 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:42:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void precise_usleep(long usec)
 {
 	t_time start, current;
 	long elapsed;
-	//long rem;
 
 	gettimeofday(&start, NULL);
 	gettimeofday(&current, NULL);

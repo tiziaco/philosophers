@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/13 11:25:10 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:31:05 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_parms	init_parms(int argc, char **argv)
 	parms.time_to_die = ft_atoi(argv[2]);
 	parms.time_to_eat = ft_atoi(argv[3]);
 	parms.time_to_sleep = ft_atoi(argv[4]);
-	parms.nbr_must_eat = 0;
+	parms.meals_counter = 0;
 	if (argc == 6)
-		parms.nbr_must_eat = ft_atoi(argv[5]);
+		parms.meals_counter = ft_atoi(argv[5]);
 	return (parms);
 }
 
@@ -68,7 +68,7 @@ t_parms	init_parms_test()
 	parms.time_to_die = 200;
 	parms.time_to_eat = 200;
 	parms.time_to_sleep = 200;
-	parms.nbr_must_eat = 0;
+	parms.meals_counter = 0;
 	parms.is_valid = true;
 	return (parms);
 }
@@ -79,7 +79,7 @@ int	main(void)
 	t_parms			parms;
 	t_philo			**philosophers;
 	pthread_mutex_t	**forks;
-	pthread_t	t1; 
+	pthread_t		t1; 
 
 	parms = init_parms_test();
 	if (!parms.is_valid)

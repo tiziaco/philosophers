@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/13 11:23:50 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/15 10:59:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*start_routine()
 	return (NULL);
 }
 
-void *philosopher(void *arg)
+void *philosopher_routine(void *arg)
 {
 	int id;
 	int left_fork;
@@ -45,16 +45,13 @@ void *philosopher(void *arg)
 		// Thinking
 		printf("Philosopher %d is thinking.\n", id);
 		sleep(1);
-
 		// Pick up forks
 		printf("Philosopher %d is picking up forks.\n", id);
 		pthread_mutex_lock(&((*((pthread_mutex_t**)arg))[left_fork]));
 		pthread_mutex_lock(&((*((pthread_mutex_t**)arg))[right_fork]));
-
 		// Eating
 		printf("Philosopher %d is eating.\n", id);
 		sleep(1);
-
 		// Put down forks
 		pthread_mutex_unlock(&((*((pthread_mutex_t**)arg))[right_fork]));
 		pthread_mutex_unlock(&((*((pthread_mutex_t**)arg))[left_fork]));
