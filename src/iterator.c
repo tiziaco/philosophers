@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/15 10:59:43 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:39:30 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*start_routine()
 	while (i < 4000)
 	{
 		gettimeofday(&cur_time, 0);
-		printf("%d\n", elapsed_time_ms(start_time, cur_time));
+		printf("%lld\n", get_elapsed_time(start_time, cur_time, MILLISECONDS));
 		precise_usleep(4000);
 		i++;
 	}
@@ -59,9 +59,10 @@ void *philosopher_routine(void *arg)
 	return NULL;
 }
 
-void	*manager(void *arg)
+/* void	*manager(void *arg)
 {
 	int	start_time;
 	
 	start_time = *(int *)arg;
-}
+	return ;
+} */

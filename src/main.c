@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/15 10:31:05 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:38:49 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,19 @@ t_parms	init_parms_test()
 int	main(void)
 {
 	//pthread_t t1;
-	t_parms			parms;
+	/* t_parms			parms;
 	t_philo			**philosophers;
-	pthread_mutex_t	**forks;
+	pthread_mutex_t	**forks; */
+	t_data	*data;
 	pthread_t		t1; 
-
-	parms = init_parms_test();
+	int		argc = 5;
+	char	*argv[6] = {argv[0] = "aaa\0", argv[1] = "5", argv[2] = "200", 
+		argv[3] = "100", argv[4] = "150", argv[5] = NULL};
+	
+	data = init_data(argc, argv);
+	if (!data)
+		return(EXIT_FAILURE);
+	/* parms = init_parms_test();
 	if (!parms.is_valid)
 		return (PARMS_ERROR);
 	philosophers = init_philosphers(parms);
@@ -89,12 +96,11 @@ int	main(void)
 		return (ALLOCATION_ERROR);
 	forks = init_forks(parms.phils_nbr);
 	if (!forks)
-		return (ALLOCATION_ERROR);
+		return (ALLOCATION_ERROR); */
 	
-	print_parms(parms);
-	print_philo_ids(philosophers);
-	free_philosophers(philosophers);
-	free_forks(forks);
+	/* print_parms(parms);
+	print_philo_ids(philosophers); */
+	free_data(data);
 	pthread_create(&t1, NULL, &start_routine, NULL);
 	pthread_join(t1, NULL);
 	return (0);

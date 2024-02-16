@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/02/08 12:00:15 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/02/16 09:58:41 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ	= $(SRC:.c=.o)
 
 RM		= rm -f
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -pthread
+CFLAGS	= -pthread #-Wall -Wextra -Werror
 
 all: $(NAME)
 

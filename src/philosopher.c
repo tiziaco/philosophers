@@ -6,13 +6,13 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:04:15 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/15 10:28:47 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:33:20 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static t_philo	*create_philosopher(int	id, t_parms parms)
+static t_philo	*create_philosopher(int	id, t_data *data)
 {
 	t_philo	*philo;
 
@@ -21,23 +21,27 @@ static t_philo	*create_philosopher(int	id, t_parms parms)
 		return (NULL);
 	philo->id = id;
 	philo->is_alive = true;
-	philo->meals_counter = parms.meals_counter;
+	philo->meals_counter = data->parms.meals_counter;
 	philo->last_eat_time = 0;
+	philo->data = data;
+	pthread_mutex_init(philo->philo_mutex, NULL);
 	return (philo);
 }
 
-t_philo	**init_philosphers(t_parms parms)
+t_philo	**init_philosphers(t_data *data)
 {
 	t_philo	**philosophers;
+	int		phil_nbr;
 	int		i;
 
-	philosophers = (t_philo **)malloc((parms.phils_nbr + 1) * sizeof(t_philo *));
+	phil_nbr = data->parms.phils_nbr;
+	philosophers = (t_philo **)malloc((phil_nbr + 1) * sizeof(t_philo *));
 	if (!philosophers)
 		return (NULL);
 	i = 0;
-	while (i < parms.phils_nbr)
+	while (i < phil_nbr)
 	{
-		philosophers[i] = create_philosopher(i, parms);
+		philosophers[i] = create_philosopher(i, data);
 		if (!philosophers[i])
 		{
 			free_philosophers(philosophers);
@@ -56,6 +60,7 @@ void	free_philosophers(t_philo **philosphers)
 	i = 0;
 	while (philosphers[i] != NULL)
 	{
+		pthread_mutex_destroy(philosphers[i]->philo_mutex);
 		free(philosphers[i]);
 		i++;
 	}

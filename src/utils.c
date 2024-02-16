@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:20:05 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/07 15:25:17 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:35:12 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,10 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result *= sign);
+}
+
+void	error_exit(const char *error)
+{
+	printf(RED" %s \n"RST, error);
+	exit(EXIT_FAILURE);
 }
