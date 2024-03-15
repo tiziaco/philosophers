@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/16 11:38:49 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:40:41 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,24 @@ t_parms	init_parms(int argc, char **argv)
 	return (parms);
 }
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_parms			parms;
-	t_philo			**philosophers;
-	pthread_mutex_t	**forks;
+	t_data	*data;
 
 	if (argc < 5)
 		return (0);
-	parms = init_parms(argc, argv);
-	if (!parms.is_valid)
-		return (PARMS_ERROR);
-	philosophers = init_philosphers(parms);
-	if (!parms.is_valid)
-		return (ALLOCATION_ERROR);
-	forks = init_forks(parms.phils_nbr);
-	if (!forks)
-		return (ALLOCATION_ERROR);
-	free_philosophers(philosophers);
-	free_forks(forks);
-	return (0);
-} */
+	data = init_data(argc, argv);
+	if (!data)
+		return(EXIT_FAILURE);
+	print_parms(data->parms);
+	print_philo_ids(data->philos);
+	free_data(data);
+	return (EXIT_SUCCESS);
+}
 
 /***** TEST MAIN ********/
 
-t_parms	init_parms_test()
+/* t_parms	init_parms_test()
 {
 	t_parms	parms;
 	parms.phils_nbr = 5;
@@ -71,14 +64,11 @@ t_parms	init_parms_test()
 	parms.meals_counter = 0;
 	parms.is_valid = true;
 	return (parms);
-}
+} */
 
-int	main(void)
+/* int	main(void)
 {
 	//pthread_t t1;
-	/* t_parms			parms;
-	t_philo			**philosophers;
-	pthread_mutex_t	**forks; */
 	t_data	*data;
 	pthread_t		t1; 
 	int		argc = 5;
@@ -88,20 +78,11 @@ int	main(void)
 	data = init_data(argc, argv);
 	if (!data)
 		return(EXIT_FAILURE);
-	/* parms = init_parms_test();
-	if (!parms.is_valid)
-		return (PARMS_ERROR);
-	philosophers = init_philosphers(parms);
-	if (!philosophers)
-		return (ALLOCATION_ERROR);
-	forks = init_forks(parms.phils_nbr);
-	if (!forks)
-		return (ALLOCATION_ERROR); */
 	
-	/* print_parms(parms);
-	print_philo_ids(philosophers); */
+	print_parms(data->parms);
+	print_philo_ids(data->philos);
 	free_data(data);
-	pthread_create(&t1, NULL, &start_routine, NULL);
-	pthread_join(t1, NULL);
+	//pthread_create(&t1, NULL, &start_routine, NULL);
+	//pthread_join(t1, NULL);
 	return (0);
-}
+} */

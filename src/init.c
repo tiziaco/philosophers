@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/16 10:33:52 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:51:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static t_parms	init_parms(int argc, char **argv)
 	int		parm;
 
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
 		if (!is_num(argv[i]))
 			return (INVALID_PARAMS);
 		parm = ft_atoi(argv[i]);
 		if (parm <= 0)
 			return (INVALID_PARAMS);
+		i++;
 	}
 	parms.phils_nbr = ft_atoi(argv[1]);
 	parms.time_to_die = ft_atoi(argv[2]);
@@ -34,6 +35,7 @@ static t_parms	init_parms(int argc, char **argv)
 	parms.meals_counter = 0;
 	if (argc == 6)
 		parms.meals_counter = ft_atoi(argv[5]);
+	parms.is_valid = true;
 	return (parms);
 }
 
