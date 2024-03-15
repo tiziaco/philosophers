@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 15:22:13 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:29:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_parms
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-	int		meals_counter;
+	int		max_meals;
 	bool	is_valid;
 }	t_parms;
 
@@ -83,7 +83,7 @@ typedef struct s_philo
 	bool		is_alive;
 	bool		is_full;
 	int			meals_counter;
-	int			last_eat_time;
+	t_time		last_eat_time;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	t_data		*data;
@@ -99,41 +99,63 @@ typedef struct s_data
 	t_time		start_time;
 	bool		simulation_ended;
 	bool		all_threads_ready;
+	int			threads_counter;
 	pthread_t	monitor;
 	t_mutex		table_mutex;
 	t_mutex		write_mutex;
 }	t_data;
 
 /* Time functions */
-long long get_elapsed_time(t_time start, t_time end, t_time_unit unit);
-void	precise_usleep(long usec);
+long long	get_elapsed_time(t_time start, t_time end, t_time_unit unit);
+void		precise_usleep(long usec);
 
 /* Utility functions */
-int		is_num(const char *str);
-int		ft_atoi(const char *str);
+int			is_num(const char *str);
+int			ft_atoi(const char *str);
 
 /* Philosopher functions */
-t_philo	**init_philosphers(t_data *data);
-void	free_philosophers(t_philo **philosphers);
+t_philo		**init_philosphers(t_data *data);
+void		free_philosophers(t_philo **philosphers);
+
+/* Actions */
+void		assign_forks(t_philo *philo, t_fork **forks, int philo_position);
+void		philo_sleep(t_philo *philo);
+void		eat(t_philo *philo);
+void		think(t_philo *philo, bool pre_simulation);
 
 /* Forks functions*/
-t_fork	**init_forks(int philo_nbr);
-void	free_forks(t_fork **forks);
+t_fork		**init_forks(int philo_nbr);
+void		free_forks(t_fork **forks);
 
 /* Runtime functions */
-t_data	*init_data(int argc, char **argv);
-void	free_data(t_data *data);
-void	*start_routine();
-void	error_exit(const char *error);
+t_data		*init_data(int argc, char **argv);
+void		free_data(t_data *data);
+//void		*start_routine();
+void		error_exit(const char *error);
 
 /* Handlers */
-void	mutex_handler(t_mutex *mutex, t_action action);
+void		mutex_handler(t_mutex *mutex, t_action action);
 
 /* Getters and setters */
-bool	is_full(t_philo *philo);
+bool		philo_is_full(t_philo *philo);
+bool		sim_is_running(t_data *data);
+bool		all_threads_ready(t_data *data);
 
-/* Test functions*/
-void	print_parms(t_parms parms);
-void	print_philo_ids(t_philo **philosophers);
+void		set_last_meal_time(t_philo *philo);
+void		set_full(t_philo *philo);
+void		set_simulation_ended(t_data *data);
+void		set_all_threads_ready(t_data *data);
+void		increase_thread_counter(t_data *data);
+
+/* Sync utils */
+void		wait_all_threads(t_data *data);
+bool		all_threads_running(t_data *data);
+void		de_synchronize_philos(t_philo *philo);
+
+
+/* Print functions*/
+void		print_status(t_philo_status status, t_philo *philo);
+void		print_parms(t_parms parms);
+void		print_philo_ids(t_philo **philosophers);
 
 #endif
