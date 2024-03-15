@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:34:41 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/16 10:29:43 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:09:17 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_fork	*create_fork(int id)
 	if (!fork)
 		return (NULL);
 	fork->id = id;
-	pthread_mutex_init(fork->fork_mutex, NULL);
+	pthread_mutex_init(&fork->fork_mutex, NULL);
 	return (fork);
 }
 
@@ -49,12 +49,15 @@ t_fork	**init_forks(int philo_nbr)
 
 void	free_forks(t_fork **forks)
 {
-	int	i;
+	t_fork	*fork;
+	int		i;
 
+	fork = NULL;
 	i = 0;
 	while (forks[i] != NULL)
 	{
-		pthread_mutex_destroy(forks[i]->fork_mutex);
+		fork = forks[i];
+		pthread_mutex_destroy(&fork->fork_mutex);
 		free(forks[i]);
 		i++;
 	}

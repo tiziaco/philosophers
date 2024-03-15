@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/16 11:35:48 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:22:13 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_parms
 typedef struct s_fork
 {
 	int		id;
-	t_mutex	*fork_mutex;
+	t_mutex	fork_mutex;
 }	t_fork;
 
 typedef struct s_philo
@@ -88,7 +88,7 @@ typedef struct s_philo
 	t_fork		*right_fork;
 	t_data		*data;
 	pthread_t	thread_id;
-	t_mutex		*philo_mutex;
+	t_mutex		philo_mutex;
 }	t_philo;
 
 typedef struct s_data
@@ -100,8 +100,8 @@ typedef struct s_data
 	bool		simulation_ended;
 	bool		all_threads_ready;
 	pthread_t	monitor;
-	t_mutex		*table_mutex;
-	t_mutex		*write_mutex;
+	t_mutex		table_mutex;
+	t_mutex		write_mutex;
 }	t_data;
 
 /* Time functions */

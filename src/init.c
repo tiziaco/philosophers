@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 12:51:11 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:23:40 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static t_parms	init_parms(int argc, char **argv)
 	while (i < argc)
 	{
 		if (!is_num(argv[i]))
-			return (INVALID_PARAMS);
+			return ((t_parms){.is_valid = false});
 		parm = ft_atoi(argv[i]);
 		if (parm <= 0)
-			return (INVALID_PARAMS);
+			return ((t_parms){.is_valid = false});
 		i++;
 	}
 	parms.phils_nbr = ft_atoi(argv[1]);
@@ -55,8 +55,8 @@ t_data	*init_data(int argc, char **argv)
 	data->forks = init_forks(data->parms.phils_nbr);
 	if (!data->forks)
 		return (NULL);
-	pthread_mutex_init(data->write_mutex, NULL);
-	pthread_mutex_init(data->table_mutex, NULL);
+	pthread_mutex_init(&data->write_mutex, NULL);
+	pthread_mutex_init(&data->table_mutex, NULL);
 	return (data);
 }
 
@@ -64,6 +64,7 @@ void	free_data(t_data *data)
 {
 	free_philosophers(data->philos);
 	free_forks(data->forks);
-	pthread_mutex_destroy(data->table_mutex);
-	pthread_mutex_destroy(data->write_mutex);
+	pthread_mutex_destroy(&data->table_mutex);
+	pthread_mutex_destroy(&data->write_mutex);
+	free(data);
 }
