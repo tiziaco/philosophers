@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 15:23:40 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:07:34 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static t_parms	init_parms(int argc, char **argv)
 	parms.time_to_die = ft_atoi(argv[2]);
 	parms.time_to_eat = ft_atoi(argv[3]);
 	parms.time_to_sleep = ft_atoi(argv[4]);
-	parms.meals_counter = 0;
+	parms.max_meals = 0;
 	if (argc == 6)
-		parms.meals_counter = ft_atoi(argv[5]);
+		parms.max_meals = ft_atoi(argv[5]);
 	parms.is_valid = true;
 	return (parms);
 }
@@ -55,6 +55,9 @@ t_data	*init_data(int argc, char **argv)
 	data->forks = init_forks(data->parms.phils_nbr);
 	if (!data->forks)
 		return (NULL);
+	data->threads_counter = 0;
+	data->simulation_ended = false;
+	data->all_threads_ready = false;
 	pthread_mutex_init(&data->write_mutex, NULL);
 	pthread_mutex_init(&data->table_mutex, NULL);
 	return (data);
