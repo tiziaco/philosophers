@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 18:29:07 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:48:54 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,17 @@ t_fork		**init_forks(int philo_nbr);
 void		free_forks(t_fork **forks);
 
 /* Runtime functions */
+void		start_dinner_simulation(t_data *data);
 t_data		*init_data(int argc, char **argv);
 void		free_data(t_data *data);
 //void		*start_routine();
 void		error_exit(const char *error);
+void		*table_manager(void *arg);
 
 /* Handlers */
 void		mutex_handler(t_mutex *mutex, t_action action);
+void		thread_handler(pthread_t *thread, void *(*foo)(void *),
+				void *data, t_action action);
 
 /* Getters and setters */
 bool		philo_is_full(t_philo *philo);

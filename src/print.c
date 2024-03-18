@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 14:11:40 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:19:17 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	print_philo_ids(t_philo **philosophers)
 	while (philosophers[i] != NULL)
 	{
 		printf("Philosopher's ID: %d => READY\n", philosophers[i]->id);
+		printf("	Fork left: %d\n", philosophers[i]->left_fork->id);
+		printf("	Fork right: %d\n", philosophers[i]->right_fork->id);
 		i++;
 	}
 }
@@ -40,7 +42,7 @@ void	print_status(t_philo_status status, t_philo *philo)
 
 	gettimeofday(&cur_time, NULL);
 	elapsed = get_elapsed_time(philo->data->start_time, cur_time, MILLISECONDS);
-	if (is_full(philo))
+	if (philo_is_full(philo))
 		return ;
 	mutex_handler(&philo->data->write_mutex, LOCK);
 		if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK))

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 18:07:34 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 11:42:23 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_parms	init_parms(int argc, char **argv)
 	parms.time_to_die = ft_atoi(argv[2]);
 	parms.time_to_eat = ft_atoi(argv[3]);
 	parms.time_to_sleep = ft_atoi(argv[4]);
-	parms.max_meals = 0;
+	parms.max_meals = -1;
 	if (argc == 6)
 		parms.max_meals = ft_atoi(argv[5]);
 	parms.is_valid = true;
@@ -49,11 +49,11 @@ t_data	*init_data(int argc, char **argv)
 	data->parms = init_parms(argc, argv);
 	if (!data->parms.is_valid)
 		return (NULL);
-	data->philos = init_philosphers(data);
-	if (!data->philos)
-		return (NULL);
 	data->forks = init_forks(data->parms.phils_nbr);
 	if (!data->forks)
+		return (NULL);
+	data->philos = init_philosphers(data);
+	if (!data->philos)
 		return (NULL);
 	data->threads_counter = 0;
 	data->simulation_ended = false;

@@ -19,6 +19,9 @@
                 "${fileDirname}/print.c",
                 "${fileDirname}/time.c",
                 "${fileDirname}/utils.c",
+                "${fileDirname}/setters.c",
+                "${fileDirname}/sync_utils.c",
+                "${fileDirname}/monitor.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

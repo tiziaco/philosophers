@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:38:02 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/02/16 10:48:54 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:15:55 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,38 @@ void	mutex_handler(t_mutex *mutex, t_action action)
 	else
 		error_exit("Wrong action for mutex_handle: \
 			use <LOCK> <UNLOCK> <INIT> <DESTROY>");
+}
+
+static void	handle_thread_error(int status, t_action action)
+{
+	if (0 == status)
+		return ;
+	if (EAGAIN == status)
+		error_exit("No resources to create another thread");
+	else if (EPERM == status)
+		error_exit("The caller does not have appropriate permission\n");
+	else if (EINVAL == status && CREATE == action)
+		error_exit("The value specified by attr is invalid.");
+	else if (EINVAL == status && (JOIN == action || DETACH == action))
+		error_exit("The value specified by thread is not joinable\n");
+	else if (ESRCH == status)
+		error_exit("No thread could be found corresponding to that"
+			"specified by the given thread ID, thread.");
+	else if (EDEADLK == status)
+		error_exit("A deadlock was detected or the value of"
+			"thread specifies the calling thread.");
+}
+
+void	thread_handler(pthread_t *thread, void *(*foo)(void *),
+		void *data, t_action action)
+{
+	if (CREATE == action)
+		handle_thread_error(pthread_create(thread, NULL, foo, data), action);
+	else if (JOIN == action)
+		handle_thread_error(pthread_join(*thread, NULL), action);
+	else if (DETACH == action)
+		handle_thread_error(pthread_detach(*thread), action);
+	else
+		error_exit("Wrong action for thread_handle:"
+			" use <CREATE> <JOIN> <DETACH>");
 }

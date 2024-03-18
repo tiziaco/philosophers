@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:03:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 18:24:55 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:00:06 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	de_synchronize_philos(t_philo *philo)
 	else
 	{
 		if (philo->id % 2)
-			thinking(philo, true);
+			think(philo, true);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/15 18:29:59 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:59:18 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	phil_is_dead(t_philo *philo, int time_to_die)
 	long	elapsed;
 	t_time	cur_time;
 
-	if (is_full(philo))
+	if (philo_is_full(philo))
 		return (false);
 	gettimeofday(&cur_time, NULL);
 	elapsed = get_elapsed_time(philo->last_eat_time, cur_time, MILLISECONDS);

@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "macOS debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main",
+            "args": ["5", "200", "100", "150"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "build philosophers"
+        },
+        {
             "name": "Linux debug",
             "type": "cppdbg",
             "request": "launch",
