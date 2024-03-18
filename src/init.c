@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 11:42:23 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:53:27 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static t_parms	init_parms(int argc, char **argv)
 		i++;
 	}
 	parms.phils_nbr = ft_atoi(argv[1]);
-	parms.time_to_die = ft_atoi(argv[2]);
-	parms.time_to_eat = ft_atoi(argv[3]);
-	parms.time_to_sleep = ft_atoi(argv[4]);
+	parms.time_to_die = ft_atoi(argv[2]) * 1000;
+	parms.time_to_eat = ft_atoi(argv[3]) * 1000;
+	parms.time_to_sleep = ft_atoi(argv[4]) * 1000;
 	parms.max_meals = -1;
 	if (argc == 6)
 		parms.max_meals = ft_atoi(argv[5]);
@@ -46,6 +46,11 @@ t_data	*init_data(int argc, char **argv)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->threads_counter = 0;
+	data->simulation_ended = false;
+	data->all_threads_ready = false;
+	pthread_mutex_init(&data->write_mutex, NULL);
+	pthread_mutex_init(&data->table_mutex, NULL);
 	data->parms = init_parms(argc, argv);
 	if (!data->parms.is_valid)
 		return (NULL);
@@ -55,11 +60,6 @@ t_data	*init_data(int argc, char **argv)
 	data->philos = init_philosphers(data);
 	if (!data->philos)
 		return (NULL);
-	data->threads_counter = 0;
-	data->simulation_ended = false;
-	data->all_threads_ready = false;
-	pthread_mutex_init(&data->write_mutex, NULL);
-	pthread_mutex_init(&data->table_mutex, NULL);
 	return (data);
 }
 

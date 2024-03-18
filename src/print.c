@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 12:19:17 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:39:32 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ void	print_status(t_philo_status status, t_philo *philo)
 	if (philo_is_full(philo))
 		return ;
 	mutex_handler(&philo->data->write_mutex, LOCK);
-		if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK))
+		if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK)
+			&& !sim_is_running(philo->data))
 			printf("%ld %d has taken a fork\n", elapsed, philo->id);
-		else if (status == EATING)
+		else if (status == EATING && !sim_is_running(philo->data))
 			printf("%ld %d is eating\n", elapsed, philo->id);
-		else if (status == SLEEPING)
+		else if (status == SLEEPING && !sim_is_running(philo->data))
 			printf("%ld %d is sleeping\n", elapsed, philo->id);
-		else if (status == THINKING)
+		else if (status == THINKING && !sim_is_running(philo->data))
 			printf("%ld %d is thinking\n", elapsed, philo->id);
 		else if (status == DIED)
 			printf("%ld %d died\n", elapsed, philo->id);

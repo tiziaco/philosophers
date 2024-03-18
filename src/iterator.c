@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 11:55:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:23:22 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	start_dinner_simulation(t_data *data)
 		return ;
 	else if (data->parms.phils_nbr == 1)
 		thread_handler(&(data->philos[0]->thread_id), one_philo_routine,
-			&data->philos[0], CREATE);
+			data->philos[0], CREATE);
 	else
 		while (++i < data->parms.phils_nbr)
 			thread_handler(&(data->philos[i]->thread_id), dinner_routine,
-				&data->philos[i], CREATE);
+				data->philos[i], CREATE);
 	thread_handler(&data->monitor, table_manager, data, CREATE);
 	gettimeofday(&data->start_time, NULL);
 	set_all_threads_ready(data);

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 09:59:18 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:26:33 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	phil_is_dead(t_philo *philo, int time_to_die)
 	if (philo_is_full(philo))
 		return (false);
 	gettimeofday(&cur_time, NULL);
-	elapsed = get_elapsed_time(philo->last_eat_time, cur_time, MILLISECONDS);
+	elapsed = get_elapsed_time(philo->last_eat_time, cur_time, MICROSECONDS);
 	if (elapsed > time_to_die)
 		return (true);
 	return (false);
@@ -36,8 +36,8 @@ void	*table_manager(void *arg)
 		;
 	while (!sim_is_running(data))
 	{	
-		i = 1;
-		while (i <= data->parms.phils_nbr && !sim_is_running(data))
+		i = -1;
+		while (++i < data->parms.phils_nbr && !sim_is_running(data))
 		{
 			if (phil_is_dead(data->philos[i], data->parms.time_to_die))
 			{
