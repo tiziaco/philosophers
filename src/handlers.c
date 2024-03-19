@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:38:02 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 10:15:55 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:41:35 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	handle_mutex_error(int status, t_action action)
 {
 	if (0 == status)
-		return;
+		return ;
 	if ((action == LOCK || action == UNLOCK) && status == EINVAL)
 		error_exit("The value specified by mutex is invalid");
 	else if (action == INIT && status == EINVAL)

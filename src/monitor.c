@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 19:26:33 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:40:33 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*table_manager(void *arg)
 	while (!all_threads_running(data))
 		;
 	while (!sim_is_running(data))
-	{	
+	{
 		i = -1;
 		while (++i < data->parms.phils_nbr && !sim_is_running(data))
 		{

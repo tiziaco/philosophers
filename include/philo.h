@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 10:48:54 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:40:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/time.h>
 # include <errno.h>
 
-# define INVALID_PARAMS ((t_parms){.is_valid = false})
+// # define INVALID_PARAMS ((t_parms){.is_valid = false})
 # define PARMS_ERROR 		1
 # define ALLOCATION_ERROR	2
 
@@ -155,7 +155,6 @@ void		increase_thread_counter(t_data *data);
 void		wait_all_threads(t_data *data);
 bool		all_threads_running(t_data *data);
 void		de_synchronize_philos(t_philo *philo);
-
 
 /* Print functions*/
 void		print_status(t_philo_status status, t_philo *philo);

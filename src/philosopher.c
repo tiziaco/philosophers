@@ -6,13 +6,13 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:04:15 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 11:46:15 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:43:32 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static t_philo	*create_philosopher(int	id, t_data *data)
+static t_philo	*create_philosopher(int id, t_data *data)
 {
 	t_philo	*philo;
 
