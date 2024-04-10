@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/19 15:41:57 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:38:39 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	*dinner_routine(void *arg)
 	de_synchronize_philos(philo);
 	while (!sim_is_running(philo->data))
 	{
-		if (philo_is_full(philo))
-			break ;
+		/* if (philo_is_full(philo))
+			break ; */ // NOT OK: i have to check if each philosopher ate at least N times
 		eat(philo);
 		philo_sleep(philo);
 		think(philo, false);

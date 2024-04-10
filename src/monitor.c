@@ -6,16 +6,16 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/19 15:40:33 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:47:28 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool	phil_is_dead(t_philo *philo, int time_to_die)
+bool phil_is_dead(t_philo *philo, int time_to_die)
 {
-	long	elapsed;
-	t_time	cur_time;
+	long elapsed;
+	t_time cur_time;
 
 	if (philo_is_full(philo))
 		return (false);
@@ -26,26 +26,56 @@ bool	phil_is_dead(t_philo *philo, int time_to_die)
 	return (false);
 }
 
-void	*table_manager(void *arg)
+void	phils_are_full(t_data *data)
+{
+	int	i;
+	int	full_phils;
+
+	i = -1;
+	full_phils = 0;
+	while (++i < data->parms.phils_nbr && !sim_is_running(data))
+	{
+		if (philo_is_full(data->philos[i]))
+			full_phils++;
+		i++;
+	}
+	printf("Checking... %d \n", full_phils);
+	if (full_phils == data->parms.phils_nbr)
+	{
+		set_simulation_ended(data);
+		printf("Philos ate enough\n");
+	}
+}
+
+void	phils_are_dead(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->parms.phils_nbr && !sim_is_running(data))
+	{
+		if (phil_is_dead(data->philos[i], data->parms.time_to_die))
+		{
+			set_simulation_ended(data);
+			print_status(DIED, data->philos[i]);
+			break ;
+		}
+		i++;
+	}
+}
+
+void *table_manager(void *arg)
 {
 	int		i;
-	t_data	*data;
+	t_data *data;
 
 	data = (t_data *)arg;
 	while (!all_threads_running(data))
 		;
 	while (!sim_is_running(data))
 	{
-		i = -1;
-		while (++i < data->parms.phils_nbr && !sim_is_running(data))
-		{
-			if (phil_is_dead(data->philos[i], data->parms.time_to_die))
-			{
-				set_simulation_ended(data);
-				print_status(DIED, data->philos[i]);
-			}
-			i++;
-		}
+		phils_are_dead(data);
+		phils_are_full(data);
 	}
 	return (NULL);
 }
