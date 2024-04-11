@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/10 17:38:39 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:35:34 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ void	*dinner_routine(void *arg)
 	{
 		/* if (philo_is_full(philo))
 			break ; */ // NOT OK: i have to check if each philosopher ate at least N times
-		eat(philo);
-		philo_sleep(philo);
-		think(philo, false);
+		if (!sim_is_running(philo->data))
+			eat(philo);
+		if (!sim_is_running(philo->data))
+			philo_sleep(philo);
+		if (!sim_is_running(philo->data))
+			think(philo, false);
 	}
+	printf("Exiting philo nbr. %d", philo->id);
 	return (NULL);
 }
 

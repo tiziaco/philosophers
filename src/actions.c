@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/18 17:23:58 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:15:54 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ void	eat(t_philo *philo)
 	mutex_handler(&philo->right_fork->fork_mutex, LOCK);
 	print_status(TAKE_SECOND_FORK, philo);
 	set_last_meal_time(philo);
-	philo->meals_counter++;
+	
+	//printf("OOOK... %d \n", philo->meals_counter);
 	print_status(EATING, philo);
 	precise_usleep(philo->data->parms.time_to_eat);
-	if (philo->data->parms.max_meals > 0
+	increase_meals_counter(philo);
+	/* if (philo->data->parms.max_meals > 0
 		&& philo->meals_counter == philo->data->parms.max_meals)
-		set_full(philo);
+		set_full(philo); */
 	mutex_handler(&philo->left_fork->fork_mutex, UNLOCK);
 	mutex_handler(&philo->right_fork->fork_mutex, UNLOCK);
 }

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/10 17:47:28 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:45:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,32 @@ bool phil_is_dead(t_philo *philo, int time_to_die)
 	return (false);
 }
 
-void	phils_are_full(t_data *data)
+bool	phils_are_full(t_data *data)
 {
 	int	i;
 	int	full_phils;
 
 	i = -1;
 	full_phils = 0;
-	while (++i < data->parms.phils_nbr && !sim_is_running(data))
+	while (++i < data->parms.phils_nbr)
 	{
 		if (philo_is_full(data->philos[i]))
 			full_phils++;
 		i++;
 	}
-	printf("Checking... %d \n", full_phils);
-	if (full_phils == data->parms.phils_nbr)
+	/* if (full_phils >= 3)
+		printf("OOOK... %d \n", full_phils); */
+	//printf("OOOK... %d \n", full_phils);
+	if (full_phils == (data->parms.phils_nbr))
 	{
 		set_simulation_ended(data);
 		printf("Philos ate enough\n");
+		return (true);
 	}
+	return (false);
 }
 
-void	phils_are_dead(t_data *data)
+bool	phils_are_dead(t_data *data)
 {
 	int	i;
 
@@ -58,10 +62,11 @@ void	phils_are_dead(t_data *data)
 		{
 			set_simulation_ended(data);
 			print_status(DIED, data->philos[i]);
-			break ;
+			return (true);
 		}
 		i++;
 	}
+	return (false);
 }
 
 void *table_manager(void *arg)
@@ -74,8 +79,8 @@ void *table_manager(void *arg)
 		;
 	while (!sim_is_running(data))
 	{
-		phils_are_dead(data);
-		phils_are_full(data);
+		if (phils_are_dead(data) || phils_are_full(data))
+			return (NULL);
 	}
 	return (NULL);
 }

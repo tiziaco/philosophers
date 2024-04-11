@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:31:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/19 15:41:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:20:17 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	set_full(t_philo *philo)
 {
 	mutex_handler(&philo->philo_mutex, LOCK);
 	philo->is_full = true;
+	mutex_handler(&philo->philo_mutex, UNLOCK);
+}
+
+void	increase_meals_counter(t_philo *philo)
+{
+	mutex_handler(&philo->philo_mutex, LOCK);
+	philo->meals_counter++;
 	mutex_handler(&philo->philo_mutex, UNLOCK);
 }
 
