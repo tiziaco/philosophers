@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 17:35:34 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:26:45 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ void	*dinner_routine(void *arg)
 	de_synchronize_philos(philo);
 	while (!sim_is_running(philo->data))
 	{
-		/* if (philo_is_full(philo))
-			break ; */ // NOT OK: i have to check if each philosopher ate at least N times
-		if (!sim_is_running(philo->data))
-			eat(philo);
-		if (!sim_is_running(philo->data))
-			philo_sleep(philo);
-		if (!sim_is_running(philo->data))
-			think(philo, false);
+		if (sim_is_running(philo->data))
+			break ; // NOT OK: i have to check if each philosopher ate at least N times
+		eat(philo);
+		philo_sleep(philo);
+		think(philo, false);
 	}
-	printf("Exiting philo nbr. %d", philo->id);
+	printf("Exiting philo nbr. %d\n", philo->id);
+	set_simulation_ended(philo->data);
 	return (NULL);
 }
 
@@ -70,6 +68,6 @@ void	start_dinner_simulation(t_data *data)
 	i = -1;
 	while (++i < data->parms.phils_nbr)
 		thread_handler(&(data->philos[i]->thread_id), NULL, NULL, JOIN);
-	set_simulation_ended(data);
+	// set_simulation_ended(data);
 	thread_handler(&data->monitor, NULL, NULL, JOIN);
 }
