@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:27:45 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 17:32:18 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:54:31 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	sim_is_running(t_data *data)
 	bool	res;
 
 	mutex_handler(&data->table_mutex, LOCK);
-	res = data->simulation_ended;
+	res = data->sim_is_running;
 	mutex_handler(&data->table_mutex, UNLOCK);
 	return (res);
 }

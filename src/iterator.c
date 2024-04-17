@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 17:35:34 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:51:52 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*one_philo_routine(void *arg)
 	set_last_meal_time(philo);
 	increase_thread_counter(philo->data);
 	print_status(TAKE_FIRST_FORK, philo);
-	while (!sim_is_running(philo->data))
+	while (sim_is_running(philo->data))
 		philo_sleep(philo);
 	return (NULL);
 }
@@ -35,18 +35,19 @@ void	*dinner_routine(void *arg)
 	set_last_meal_time(philo);
 	increase_thread_counter(philo->data);
 	de_synchronize_philos(philo);
-	while (!sim_is_running(philo->data))
+	// printf("%d\n", sim_is_running(philo->data));
+	while (sim_is_running(philo->data) == true)
 	{
+		// printf("%d\n", sim_is_running(philo->data));
 		/* if (philo_is_full(philo))
 			break ; */ // NOT OK: i have to check if each philosopher ate at least N times
-		if (!sim_is_running(philo->data))
-			eat(philo);
-		if (!sim_is_running(philo->data))
-			philo_sleep(philo);
-		if (!sim_is_running(philo->data))
-			think(philo, false);
+		eat(philo);
+		philo_sleep(philo);
+		think(philo, false);
+		/* if (sim_is_running(philo->data) == false)
+			printf("%d\n", sim_is_running(philo->data)); */
 	}
-	printf("Exiting philo nbr. %d", philo->id);
+	printf("Exiting philo nbr. %d\n", philo->id);
 	return (NULL);
 }
 
@@ -55,9 +56,9 @@ void	start_dinner_simulation(t_data *data)
 	int		i;
 
 	i = -1;
-	if (data->parms.max_meals == 0)
+	if (data->parms.max_meals == 0 || data->parms.phils_nbr == 0)
 		return ;
-	else if (data->parms.phils_nbr == 1)
+	if (data->parms.phils_nbr == 1)
 		thread_handler(&(data->philos[0]->thread_id), one_philo_routine,
 			data->philos[0], CREATE);
 	else

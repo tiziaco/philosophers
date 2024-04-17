@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/19 15:44:35 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:18:45 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	print_status(t_philo_status status, t_philo *philo)
 		return ;
 	mutex_handler(&philo->data->write_mutex, LOCK);
 	if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK)
-		&& !sim_is_running(philo->data))
+		&& sim_is_running(philo->data))
 		printf("%ld %d has taken a fork\n", elapsed, philo->id);
-	else if (status == EATING && !sim_is_running(philo->data))
+	else if (status == EATING && sim_is_running(philo->data))
 		printf("%ld %d is eating\n", elapsed, philo->id);
-	else if (status == SLEEPING && !sim_is_running(philo->data))
+	else if (status == SLEEPING && sim_is_running(philo->data))
 		printf("%ld %d is sleeping\n", elapsed, philo->id);
-	else if (status == THINKING && !sim_is_running(philo->data))
+	else if (status == THINKING && sim_is_running(philo->data))
 		printf("%ld %d is thinking\n", elapsed, philo->id);
 	else if (status == DIED)
 		printf("%ld %d died\n", elapsed, philo->id);

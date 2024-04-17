@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 17:45:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:56:06 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ bool	phils_are_full(t_data *data)
 	{
 		if (philo_is_full(data->philos[i]))
 			full_phils++;
-		i++;
 	}
 	/* if (full_phils >= 3)
 		printf("OOOK... %d \n", full_phils); */
@@ -56,7 +55,7 @@ bool	phils_are_dead(t_data *data)
 	int	i;
 
 	i = -1;
-	while (++i < data->parms.phils_nbr && !sim_is_running(data))
+	while (++i < data->parms.phils_nbr && sim_is_running(data))
 	{
 		if (phil_is_dead(data->philos[i], data->parms.time_to_die))
 		{
@@ -64,7 +63,6 @@ bool	phils_are_dead(t_data *data)
 			print_status(DIED, data->philos[i]);
 			return (true);
 		}
-		i++;
 	}
 	return (false);
 }
@@ -75,12 +73,14 @@ void *table_manager(void *arg)
 	t_data *data;
 
 	data = (t_data *)arg;
-	while (!all_threads_running(data))
-		;
-	while (!sim_is_running(data))
+	wait_all_threads(data);
+	while (true)
 	{
 		if (phils_are_dead(data) || phils_are_full(data))
+		{
 			return (NULL);
+		}
+			
 	}
 	return (NULL);
 }

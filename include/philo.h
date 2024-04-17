@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 16:20:38 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:48:37 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_data
 	t_philo		**philos;
 	t_fork		**forks;
 	t_time		start_time;
-	bool		simulation_ended;
+	bool		sim_is_running;
 	bool		all_threads_ready;
 	int			threads_counter;
 	pthread_t	monitor;

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/11 17:15:54 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:55:33 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,30 @@ void	assign_forks(t_philo *philo, t_fork **forks, int philo_position)
 void	think(t_philo *philo, bool pre_simulation)
 {
 	long	t_eat;
-	long	t_sleep;
+	long	t_die;
 	long	t_think;
-
+	t_time	current;
+	
 	if (!pre_simulation)
 		print_status(THINKING, philo);
 	if (philo->data->parms.phils_nbr % 2 == 0)
 		return ;
+	mutex_handler(&philo->philo_mutex, LOCK);
+	gettimeofday(&current, NULL);
 	t_eat = philo->data->parms.time_to_eat;
-	t_sleep = philo->data->parms.time_to_sleep;
-	t_think = (t_eat * 2) - t_sleep;
+	t_die = philo->data->parms.time_to_die;
+	t_think = (t_die 
+			- get_elapsed_time(philo->last_eat_time, current, MICROSECONDS)
+			- t_eat) / 2;
+	t_think = (t_eat * 2) - philo->data->parms.time_to_sleep;;
 	if (t_think < 0)
 		t_think = 0;
-	precise_usleep(t_think * 0.42);
+	if (t_think == 0)
+		t_think = 1;
+	if (t_think > 600)
+		t_think = 200;
+	mutex_handler(&philo->philo_mutex, UNLOCK);
+	precise_usleep(t_think);
 }
 
 void	eat(t_philo *philo)
@@ -51,8 +62,6 @@ void	eat(t_philo *philo)
 	mutex_handler(&philo->right_fork->fork_mutex, LOCK);
 	print_status(TAKE_SECOND_FORK, philo);
 	set_last_meal_time(philo);
-	
-	//printf("OOOK... %d \n", philo->meals_counter);
 	print_status(EATING, philo);
 	precise_usleep(philo->data->parms.time_to_eat);
 	increase_meals_counter(philo);
