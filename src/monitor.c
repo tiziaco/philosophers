@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 17:56:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:05:41 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,22 @@ bool phil_is_dead(t_philo *philo, int time_to_die)
 
 bool	phils_are_full(t_data *data)
 {
-	int	i;
-	int	full_phils;
+	int		i;
+	bool	full_phils;
 
 	i = -1;
-	full_phils = 0;
+	full_phils = true;
 	while (++i < data->parms.phils_nbr)
 	{
 		if (philo_is_full(data->philos[i]))
 			full_phils++;
 	}
-	/* if (full_phils >= 3)
-		printf("OOOK... %d \n", full_phils); */
-	//printf("OOOK... %d \n", full_phils);
-	if (full_phils == (data->parms.phils_nbr))
+	if (full_phils)
 	{
 		set_simulation_ended(data);
 		printf("Philos ate enough\n");
-		return (true);
 	}
-	return (false);
+	return (full_phils);
 }
 
 bool	phils_are_dead(t_data *data)
@@ -82,5 +78,6 @@ void *table_manager(void *arg)
 		}
 			
 	}
+	printf("Exiting table manager\n");
 	return (NULL);
 }

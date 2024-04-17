@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 16:51:52 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:05:15 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ void	start_dinner_simulation(t_data *data)
 	i = -1;
 	while (++i < data->parms.phils_nbr)
 		thread_handler(&(data->philos[i]->thread_id), NULL, NULL, JOIN);
-	set_simulation_ended(data);
+	// set_simulation_ended(data);
 	thread_handler(&data->monitor, NULL, NULL, JOIN);
 }
