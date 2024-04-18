@@ -6,16 +6,16 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 18:05:41 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:43:55 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool phil_is_dead(t_philo *philo, int time_to_die)
+bool	phil_is_dead(t_philo *philo, int time_to_die)
 {
-	long elapsed;
-	t_time cur_time;
+	long	elapsed;
+	t_time	cur_time;
 
 	if (philo_is_full(philo))
 		return (false);
@@ -28,22 +28,18 @@ bool phil_is_dead(t_philo *philo, int time_to_die)
 
 bool	phils_are_full(t_data *data)
 {
-	int		i;
-	bool	full_phils;
+	int	i;
 
 	i = -1;
-	full_phils = true;
 	while (++i < data->parms.phils_nbr)
 	{
 		if (philo_is_full(data->philos[i]))
-			full_phils++;
+		{
+			set_simulation_ended(data);
+			return (true);
+		}
 	}
-	if (full_phils)
-	{
-		set_simulation_ended(data);
-		printf("Philos ate enough\n");
-	}
-	return (full_phils);
+	return (false);
 }
 
 bool	phils_are_dead(t_data *data)
@@ -63,21 +59,20 @@ bool	phils_are_dead(t_data *data)
 	return (false);
 }
 
-void *table_manager(void *arg)
+void	*table_manager(void *arg)
 {
 	int		i;
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)arg;
-	wait_all_threads(data);
-	while (true)
+	while (!all_threads_running(data))
+		;
+	while (sim_is_running(data))
 	{
-		if (phils_are_dead(data) || phils_are_full(data))
-		{
-			return (NULL);
-		}
-			
+		if (phils_are_dead(data))
+			break ;
+		if (phils_are_full(data))
+			break ;
 	}
-	printf("Exiting table manager\n");
 	return (NULL);
 }

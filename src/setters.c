@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:31:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 18:07:09 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:05:36 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	increase_meals_counter(t_philo *philo)
 void	set_simulation_ended(t_data *data)
 {
 	mutex_handler(&data->table_mutex, LOCK);
-	// printf("Yoooooooooooooo");
+	// printf("Yoooooooooooooo\n");
 	data->sim_is_running = false;
 	mutex_handler(&data->table_mutex, UNLOCK);
 }
@@ -51,7 +51,7 @@ void	increase_thread_counter(t_data *data)
 void	set_all_threads_ready(t_data *data)
 {
 	mutex_handler(&data->table_mutex, LOCK);
-	data->sim_is_running = true;
 	data->all_threads_ready = true;
+	data->sim_is_running = true;
 	mutex_handler(&data->table_mutex, UNLOCK);
 }

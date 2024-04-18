@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:27:45 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 18:04:35 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:04:26 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@ bool	philo_is_full(t_philo *philo)
 
 	mutex_handler(&philo->philo_mutex, LOCK);
 	//res = philo->is_full;
+	
 	if ((philo->data->parms.max_meals > 0)
 			&& (philo->meals_counter > philo->data->parms.max_meals))
-		res = true;
+		{
+			// printf("Philo: %d max meals: %d\n", philo->id, philo->data->parms.max_meals);
+			// printf("Philo: %d meals: %d\n", philo->id, philo->meals_counter);
+			res = true;
+		}
+		
 	else
 		res = false;
 	mutex_handler(&philo->philo_mutex, UNLOCK);
