@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/18 14:49:24 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:56:14 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	*dinner_routine(void *arg)
 	philo = (t_philo *)arg;
 	wait_all_threads(philo->data);
 	increase_thread_counter(philo->data);
-	set_last_meal_time(philo);
+	mutex_handler(&philo->philo_mutex, LOCK);
+	philo->last_eat_time = philo->data->start_time;
+	mutex_handler(&philo->philo_mutex, UNLOCK);
 	de_synchronize_philos(philo);
 	while (sim_is_running(philo->data) == true)
 	{
