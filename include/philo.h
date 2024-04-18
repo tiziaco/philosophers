@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 15:48:37 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:50:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_data
 
 /* Time functions */
 long long	get_elapsed_time(t_time start, t_time end, t_time_unit unit);
-void		precise_usleep(long usec);
+void		precise_usleep(long usec, t_data *data);
 
 /* Utility functions */
 int			is_num(const char *str);
