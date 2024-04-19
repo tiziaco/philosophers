@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/18 17:08:41 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:55:21 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	think(t_philo *philo, bool pre_simulation)
 	long	t_die;
 	long	t_think;
 	t_time	current;
-	
+
 	if (!pre_simulation)
 		print_status(THINKING, philo);
 	if (philo->data->parms.phils_nbr % 2 == 0)

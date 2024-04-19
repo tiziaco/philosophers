@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/17 16:18:45 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:57:12 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	print_parms(t_parms parms)
 	printf("Time to Die: %d\n", parms.time_to_die);
 	printf("Time to Eat: %d\n", parms.time_to_eat);
 	printf("Time to Sleep: %d\n", parms.time_to_sleep);
-	printf("Is Valid: %s\n", parms.is_valid ? "true" : "false");
+	printf("Is Valid: %d\n", parms.is_valid);
 }
 
 void	print_philo_ids(t_philo **philosophers)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (philosophers[i] != NULL)

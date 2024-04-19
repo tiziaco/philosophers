@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/18 14:43:55 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:04:58 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ bool	phils_are_dead(t_data *data)
 
 void	*table_manager(void *arg)
 {
-	int		i;
 	t_data	*data;
 
 	data = (t_data *)arg;

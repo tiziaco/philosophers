@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/18 15:50:07 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:54:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ bool		sim_is_running(t_data *data);
 bool		all_threads_ready(t_data *data);
 
 void		set_last_meal_time(t_philo *philo);
-void		set_full(t_philo *philo);
 void		increase_meals_counter(t_philo *philo);
 void		set_simulation_ended(t_data *data);
 void		set_all_threads_ready(t_data *data);

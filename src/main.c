@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:49:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/03/19 15:42:36 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:51:20 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ int	main(int argc, char **argv)
 	data = init_data(argc, argv);
 	if (!data)
 	{
-		//free_data(data);
+		free_data(data);
 		return (EXIT_FAILURE);
 	}
-	// print_parms(data->parms);
-	// print_philo_ids(data->philos);
 	start_dinner_simulation(data);
 	free_data(data);
 	return (EXIT_SUCCESS);

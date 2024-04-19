@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:52:25 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/18 17:09:34 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:46:24 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ long long	get_elapsed_time(t_time start, t_time end, t_time_unit unit)
 		t1 = (start.tv_sec * 1000000L) + start.tv_usec;
 		t2 = (end.tv_sec * 1000000L) + end.tv_usec;
 	}
+	else
+	{
+		t1 = 0;
+		t2 = 0;
+	}
 	return (t2 - t1);
 }
 
@@ -46,6 +51,6 @@ void	precise_usleep(long usec, t_data *data)
 		gettimeofday(&current, NULL);
 		elapsed = get_elapsed_time(start, current, MICROSECONDS);
 		if (elapsed < usec)
-			usleep(100);
+			usleep(10);
 	}
 }
