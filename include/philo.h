@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 14:54:11 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:13:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_philo
 	bool		is_alive;
 	bool		is_full;
 	int			meals_counter;
-	t_time		last_eat_time;
+	long long	last_eat_time;
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 	t_data		*data;
@@ -96,7 +96,7 @@ typedef struct s_data
 	t_parms		parms;
 	t_philo		**philos;
 	t_fork		**forks;
-	t_time		start_time;
+	long long	start_time;
 	bool		sim_is_running;
 	bool		all_threads_ready;
 	int			threads_counter;
@@ -107,7 +107,8 @@ typedef struct s_data
 
 /* Time functions */
 long long	get_elapsed_time(t_time start, t_time end, t_time_unit unit);
-void		precise_usleep(long usec, t_data *data);
+long long	get_time_ms();
+void		precise_usleep(long long msec, t_data *data);
 
 /* Utility functions */
 int			is_num(const char *str);

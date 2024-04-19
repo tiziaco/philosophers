@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 14:55:21 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:19:09 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ void	assign_forks(t_philo *philo, t_fork **forks, int philo_position)
 
 void	think(t_philo *philo, bool pre_simulation)
 {
-	long	t_eat;
-	long	t_die;
-	long	t_think;
-	t_time	current;
+	int			t_eat;
+	int			t_die;
+	int			t_think;
+	long long	current;
 
-	if (!pre_simulation)
-		print_status(THINKING, philo);
-	if (philo->data->parms.phils_nbr % 2 == 0)
-		return ;
+	/* if (philo->data->parms.phils_nbr % 2 == 0)
+		return ; */
 	mutex_handler(&philo->philo_mutex, LOCK);
-	gettimeofday(&current, NULL);
+	current = get_time_ms();
 	t_eat = philo->data->parms.time_to_eat;
 	t_die = philo->data->parms.time_to_die;
 	t_think = (t_die 
-			- get_elapsed_time(philo->last_eat_time, current, MICROSECONDS)
+			- (current - philo->last_eat_time)
 			- t_eat) / 2;
+	mutex_handler(&philo->philo_mutex, UNLOCK);
 	if (t_think < 0)
 		t_think = 0;
 	if (t_think == 0)
 		t_think = 1;
 	if (t_think > 600)
 		t_think = 200;
-	mutex_handler(&philo->philo_mutex, UNLOCK);
+	if (!pre_simulation)
+		print_status(THINKING, philo);
 	precise_usleep(t_think, philo->data);
 }
 

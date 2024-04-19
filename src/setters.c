@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:31:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 14:54:28 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:12:18 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	set_last_meal_time(t_philo *philo)
 {
 	mutex_handler(&philo->philo_mutex, LOCK);
-	gettimeofday(&philo->last_eat_time, NULL);
+	philo->last_eat_time = get_time_ms();
 	mutex_handler(&philo->philo_mutex, UNLOCK);
 }
 

@@ -6,23 +6,23 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 14:04:58 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:09:41 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool	phil_is_dead(t_philo *philo, int time_to_die)
+bool	phil_is_dead(t_philo *philo)
 {
-	long	elapsed;
-	t_time	cur_time;
+	long long	cur_time;
 
-	if (philo_is_full(philo))
-		return (false);
-	gettimeofday(&cur_time, NULL);
-	elapsed = get_elapsed_time(philo->last_eat_time, cur_time, MICROSECONDS);
-	if (elapsed > time_to_die)
+	/* if (philo_is_full(philo))
+		return (false); */
+	mutex_handler(&philo->philo_mutex, LOCK);
+	cur_time = get_time_ms();
+	if ((cur_time - philo->last_eat_time) > philo->data->parms.time_to_die)
 		return (true);
+	mutex_handler(&philo->philo_mutex, UNLOCK);
 	return (false);
 }
 
@@ -49,7 +49,7 @@ bool	phils_are_dead(t_data *data)
 	i = -1;
 	while (++i < data->parms.phils_nbr && sim_is_running(data))
 	{
-		if (phil_is_dead(data->philos[i], data->parms.time_to_die))
+		if (phil_is_dead(data->philos[i]))
 		{
 			set_simulation_ended(data);
 			print_status(DIED, data->philos[i]);
@@ -64,9 +64,9 @@ void	*table_manager(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
-	while (!all_threads_running(data))
-		;
-	while (sim_is_running(data))
+	/* while (!all_threads_running(data))
+		; */
+	while (1)
 	{
 		if (phils_are_dead(data))
 			break ;
