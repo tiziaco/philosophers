@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:09:41 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:13:01 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ bool	phil_is_dead(t_philo *philo)
 {
 	long long	cur_time;
 
-	/* if (philo_is_full(philo))
-		return (false); */
 	mutex_handler(&philo->philo_mutex, LOCK);
 	cur_time = get_time_ms();
 	if ((cur_time - philo->last_eat_time) > philo->data->parms.time_to_die)
+	{
+		mutex_handler(&philo->philo_mutex, UNLOCK);
 		return (true);
+	}
 	mutex_handler(&philo->philo_mutex, UNLOCK);
 	return (false);
 }
@@ -64,8 +65,8 @@ void	*table_manager(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
-	/* while (!all_threads_running(data))
-		; */
+	while (!all_threads_running(data))
+		;
 	while (1)
 	{
 		if (phils_are_dead(data))

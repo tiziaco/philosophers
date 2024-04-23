@@ -6,11 +6,25 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:04:15 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 14:53:10 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:35:51 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void	assign_forks(t_philo *philo, t_fork **forks, int philo_position)
+{
+	int	phils_nbr;
+
+	phils_nbr = philo->data->parms.phils_nbr;
+	philo->left_fork = forks[philo_position];
+	philo->right_fork = forks[(philo_position + 1) % phils_nbr];
+	if (philo->id % 2)
+	{
+		philo->left_fork = forks[(philo_position + 1) % phils_nbr];
+		philo->right_fork = forks[philo_position];
+	}
+}
 
 static t_philo	*create_philosopher(int id, t_data *data)
 {

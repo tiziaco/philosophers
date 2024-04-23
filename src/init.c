@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:15:32 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:52:14 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	data->threads_counter = 0;
-	data->sim_is_running = true;
+	data->sim_is_running = false;
 	data->all_threads_ready = false;
 	pthread_mutex_init(&data->write_mutex, NULL);
 	pthread_mutex_init(&data->table_mutex, NULL);

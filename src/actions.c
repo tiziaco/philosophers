@@ -6,25 +6,11 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:19:09 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:33:55 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-void	assign_forks(t_philo *philo, t_fork **forks, int philo_position)
-{
-	int	philo_nbr;
-
-	philo_nbr = philo->data->parms.phils_nbr;
-	philo->left_fork = forks[(philo_position + 1) % philo_nbr];
-	philo->right_fork = forks[philo_position];
-	if (philo->id % 2 == 0)
-	{
-		philo->left_fork = forks[philo_position];
-		philo->right_fork = forks[(philo_position + 1) % philo_nbr];
-	}
-}
 
 void	think(t_philo *philo, bool pre_simulation)
 {
@@ -33,8 +19,6 @@ void	think(t_philo *philo, bool pre_simulation)
 	int			t_think;
 	long long	current;
 
-	/* if (philo->data->parms.phils_nbr % 2 == 0)
-		return ; */
 	mutex_handler(&philo->philo_mutex, LOCK);
 	current = get_time_ms();
 	t_eat = philo->data->parms.time_to_eat;
@@ -45,9 +29,9 @@ void	think(t_philo *philo, bool pre_simulation)
 	mutex_handler(&philo->philo_mutex, UNLOCK);
 	if (t_think < 0)
 		t_think = 0;
-	if (t_think == 0)
+	if (t_think == 0 && pre_simulation == true)
 		t_think = 1;
-	if (t_think > 600)
+	if (t_think > 200)
 		t_think = 200;
 	if (!pre_simulation)
 		print_status(THINKING, philo);
@@ -59,12 +43,9 @@ void	think(t_philo *philo, bool pre_simulation)
 	long	t_eat;
 	long	t_sleep;
 	long	t_think;
-	t_time	current;
 	
 	if (!pre_simulation)
 		print_status(THINKING, philo);
-	// if (philo->data->parms.phils_nbr % 2 == 0)
-	// 	return ;
 	mutex_handler(&philo->philo_mutex, LOCK);
 	t_eat = philo->data->parms.time_to_eat;
 	t_sleep = philo->data->parms.time_to_sleep;
@@ -85,8 +66,8 @@ void	eat(t_philo *philo)
 	print_status(EATING, philo);
 	precise_usleep(philo->data->parms.time_to_eat, philo->data);
 	increase_meals_counter(philo);
-	mutex_handler(&philo->left_fork->fork_mutex, UNLOCK);
 	mutex_handler(&philo->right_fork->fork_mutex, UNLOCK);
+	mutex_handler(&philo->left_fork->fork_mutex, UNLOCK);
 }
 
 void	philo_sleep(t_philo *philo)

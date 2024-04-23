@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:38:42 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:36:48 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:41:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,17 @@ void	print_philo_ids(t_philo **philosophers)
 
 void	print_status(t_philo_status status, t_philo *philo)
 {
-	long		elapsed;
-
-	/* if (philo_is_full(philo))
-		return ; */
 	mutex_handler(&philo->data->write_mutex, LOCK);
-	elapsed = get_time_ms() - philo->data->start_time;
 	if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK)
 		&& sim_is_running(philo->data))
-		printf("%ld %d has taken a fork\n", elapsed, philo->id);
+		printf("%lld %d has taken a fork\n", get_elapsed_time(philo), philo->id);
 	else if (status == EATING && sim_is_running(philo->data))
-		printf("%ld %d is eating\n", elapsed, philo->id);
+		printf("%lld %d is eating\n", get_elapsed_time(philo), philo->id);
 	else if (status == SLEEPING && sim_is_running(philo->data))
-		printf("%ld %d is sleeping\n", elapsed, philo->id);
+		printf("%lld %d is sleeping\n", get_elapsed_time(philo), philo->id);
 	else if (status == THINKING && sim_is_running(philo->data))
-		printf("%ld %d is thinking\n", elapsed, philo->id);
+		printf("%lld %d is thinking\n", get_elapsed_time(philo), philo->id);
 	else if (status == DIED)
-		printf("%ld %d died\n", elapsed, philo->id);
+		printf("%lld %d died\n", get_elapsed_time(philo), philo->id);
 	mutex_handler(&philo->data->write_mutex, UNLOCK);
 }

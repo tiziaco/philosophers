@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:47:39 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 17:13:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:37:12 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct s_data
 }	t_data;
 
 /* Time functions */
-long long	get_elapsed_time(t_time start, t_time end, t_time_unit unit);
-long long	get_time_ms();
+long long	get_elapsed_time(t_philo *philo);
+long long	get_time_ms(void);
 void		precise_usleep(long long msec, t_data *data);
 
 /* Utility functions */

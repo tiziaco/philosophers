@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:03:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:39:28 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:40:13 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ bool	all_threads_running(t_data *data)
 
 void	de_synchronize_philos(t_philo *philo)
 {
-	if (philo->data->parms.phils_nbr % 2 == 0)
-	{
-		if (philo->id % 2 == 0)
-			precise_usleep(1, philo->data);
-	}
-/* 	else
-	{
-		if (philo->id % 2)
-			think(philo, true);
-	} */
+	if (philo->id % 2)
+		think(philo, true);
 }
