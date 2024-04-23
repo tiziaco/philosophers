@@ -6,17 +6,11 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 16:23:38 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:33:01 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-void	sim_start_delay(time_t start_time)
-{
-	while (get_time_ms() < start_time)
-		continue ;
-}
 
 void	*one_philo_routine(void *arg)
 {
@@ -40,11 +34,10 @@ void	*dinner_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	increase_thread_counter(philo->data);
-	wait_all_threads(philo->data);
 	mutex_handler(&philo->philo_mutex, LOCK);
 	philo->last_eat_time = philo->data->start_time;
 	mutex_handler(&philo->philo_mutex, UNLOCK);
-	// sim_start_delay(philo->data->start_time);
+	wait_all_threads(philo->data);
 	de_synchronize_philos(philo);
 	while (sim_is_running(philo->data) == true)
 	{
@@ -61,7 +54,6 @@ void	start_dinner_simulation(t_data *data)
 
 	if (data->parms.max_meals == 0 || data->parms.phils_nbr == 0)
 		return ;
-	//data->start_time = get_time_ms() + (data->parms.phils_nbr * 2 * 10);
 	data->start_time = get_time_ms();
 	i = -1;
 	if (data->parms.phils_nbr == 1)

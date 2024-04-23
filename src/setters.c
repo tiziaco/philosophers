@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:31:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/19 18:12:18 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:21:57 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	increase_thread_counter(t_data *data)
 void	set_all_threads_ready(t_data *data)
 {
 	mutex_handler(&data->table_mutex, LOCK);
+	data->time_delta = get_time_ms() - data->start_time;
 	data->all_threads_ready = true;
 	data->sim_is_running = true;
+	
 	mutex_handler(&data->table_mutex, UNLOCK);
 }
