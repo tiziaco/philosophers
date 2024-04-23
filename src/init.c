@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:21:33 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:39:27 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:37:14 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_parms	init_parms(int argc, char **argv)
 		if (!is_num(argv[i]))
 			return ((t_parms){.is_valid = false});
 		parm = ft_atoi(argv[i]);
-		if (parm <= 0)
+		if (parm < 0)
 			return ((t_parms){.is_valid = false});
 		i++;
 	}
@@ -36,6 +36,8 @@ static t_parms	init_parms(int argc, char **argv)
 	if (argc == 6)
 		parms.max_meals = ft_atoi(argv[5]);
 	parms.is_valid = true;
+	if (parms.phils_nbr < 1)
+		return ((t_parms){.is_valid = false});
 	return (parms);
 }
 
@@ -46,15 +48,19 @@ t_data	*init_data(int argc, char **argv)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->parms = init_parms(argc, argv);
+	if (!data->parms.is_valid)
+	{
+		printf("ERROR: Invalid parms\n");
+		free(data);
+		return (NULL);
+	}
 	data->threads_counter = 0;
 	data->sim_is_running = false;
 	data->all_threads_ready = false;
 	data->start_time = get_time_ms();
 	pthread_mutex_init(&data->write_mutex, NULL);
 	pthread_mutex_init(&data->table_mutex, NULL);
-	data->parms = init_parms(argc, argv);
-	if (!data->parms.is_valid)
-		return (NULL);
 	data->forks = init_forks(data->parms.phils_nbr);
 	if (!data->forks)
 		return (NULL);
@@ -66,8 +72,10 @@ t_data	*init_data(int argc, char **argv)
 
 void	free_data(t_data *data)
 {
-	free_philosophers(data->philos);
-	free_forks(data->forks);
+	if (data->philos)
+		free_philosophers(data->philos);
+	if (data->forks)
+		free_forks(data->forks);
 	pthread_mutex_destroy(&data->table_mutex);
 	pthread_mutex_destroy(&data->write_mutex);
 	free(data);

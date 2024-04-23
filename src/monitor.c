@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:52:08 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:58:32 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	*table_manager(void *arg)
 	data = (t_data *)arg;
 	while (!all_threads_ready(data))
 		;
-	usleep(100);
 	while (1)
 	{
 		if (phils_are_dead(data))

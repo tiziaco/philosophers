@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:46:50 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:51:54 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:39:33 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	*one_philo_routine(void *arg)
 	increase_thread_counter(philo->data);
 	wait_all_threads(philo->data);
 	print_status(TAKE_FIRST_FORK, philo);
+	philo_sleep(philo);
 	while (sim_is_running(philo->data))
-		philo_sleep(philo);
+		;
 	return (NULL);
 }
 
