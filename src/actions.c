@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:06:37 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:19:05 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:37:31 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	think(t_philo *philo, bool pre_simulation)
 		t_think = 0;
 	if (t_think == 0 && pre_simulation == true)
 		t_think = 1;
-	if (t_think > 600)
+	if (t_think > 200)
 		t_think = 200;
 	if (!pre_simulation)
 		print_status(THINKING, philo);

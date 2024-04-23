@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:04:15 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 13:35:51 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:39:56 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_philo	*create_philosopher(int id, t_data *data)
 	philo->is_alive = true;
 	philo->meals_counter = 0;
 	philo->data = data;
+	philo->last_eat_time = data->start_time;
 	pthread_mutex_init(&philo->philo_mutex, NULL);
 	return (philo);
 }

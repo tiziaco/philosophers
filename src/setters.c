@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 16:31:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:21:57 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:52:23 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ void	set_all_threads_ready(t_data *data)
 	data->time_delta = get_time_ms() - data->start_time;
 	data->all_threads_ready = true;
 	data->sim_is_running = true;
-	
 	mutex_handler(&data->table_mutex, UNLOCK);
 }

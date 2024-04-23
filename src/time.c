@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:52:25 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:30:18 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:53:04 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 long long	get_elapsed_time(t_philo *philo)
 {
-	return (get_time_ms() - (philo->data->start_time + philo->data->time_delta));
+	return (get_time_ms() 
+		- (philo->data->start_time + philo->data->time_delta));
 }
 
 long long	get_time_ms(void)

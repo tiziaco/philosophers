@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:28:10 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/04/23 18:29:11 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:52:08 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ bool	phil_is_dead(t_philo *philo)
 	if ((cur_time - philo->last_eat_time) > philo->data->parms.time_to_die)
 	{
 		mutex_handler(&philo->philo_mutex, UNLOCK);
-		printf("cur_time: %lld\nlast_eat: %lld\ndiff: %lld", cur_time, philo->last_eat_time, (cur_time - philo->last_eat_time));
 		return (true);
 	}
 	mutex_handler(&philo->philo_mutex, UNLOCK);
